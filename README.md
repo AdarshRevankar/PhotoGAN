@@ -1,12 +1,15 @@
 PhotoGAN
 ---
+[![Build Status](https://travis-ci.org/AdarshRevankar/PhotoGAN.png?branch=master)](https://travis-ci.org/AdarshRevankar/PhotoGAN)
+[![HitCount](http://hits.dwyl.com/AdarshRevankar/PhotoGAN.svg)](http://hits.dwyl.com/AdarshRevankar/PhotoGAN)
+
 Generation of Photo Realistic Image using `GAN` and `SPADE`. This project demonstrates the process of `Image-to-Image Translation` in which image is transformed to another form of image.
 
 Here our Goal is to Generate Photo Realistic Image, using the `SPADE` Architecture. This Architecture helps to Generate more Robust Images using `GAN`.
 
 ---
 ##### Setup
-1. In-order to setup we require `python 3.x` version (Better with Anaconda Environment) with requirements specified in [requirements.txt](https://github.com/AdarshRevankar/PhotoGAN/blob/master/requirement.txt).
+1. In-order to setup we require `python 3.x` version (Better with Anaconda Environment) with requirements specified in [requirements.txt](https://github.com/AdarshRevankar/PhotoGAN/blob/master/requirements.txt).
 1. Download the `checkpoints` from [this](https://drive.google.com/open?id=1hHyGiQhM5pOIOCcpor7LzyUT5hiAZnGM) link.
 1. Extract the `checkpoints` in the current directory ie. `PhotoGAN > Checkpoints`.
 1. To test the output from the model some data are already provided, to test those write the following command in the conda environment
