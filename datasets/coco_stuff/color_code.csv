@@ -1,0 +1,7 @@
+object,rgb_hex,gray,label_value
+unknown,#000000,0,0
+hill,#006400,71,126
+road,#00ff00,182,148
+grass,#640000,21,123
+sky,#ffffff,254,105
+sky,#ffffff,255,105
