@@ -1,3 +1,8 @@
+"""
+Copyright (C) 2019 NVIDIA Corporation.  All rights reserved.
+Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
+"""
+
 import re
 import importlib
 import torch
@@ -33,6 +38,10 @@ def copyconf(default_opt, **kwargs):
 
 
 def tile_images(imgs, picturesPerRow=4):
+    """ Code borrowed from
+    https://stackoverflow.com/questions/26521365/cleanly-tile-numpy-array-of-images-stored-in-a-flattened-1d-format/26521997
+    """
+
     # Padding
     if imgs.shape[0] % picturesPerRow == 0:
         rowPadding = 0
@@ -147,6 +156,11 @@ def atoi(text):
 
 
 def natural_keys(text):
+    '''
+    alist.sort(key=natural_keys) sorts in human order
+    http://nedbatchelder.com/blog/200712/human_sorting.html
+    (See Toothy's implementation in the comments)
+    '''
     return [atoi(c) for c in re.split('(\d+)', text)]
 
 
