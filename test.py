@@ -19,17 +19,17 @@ opt = TestOptions().parse()
 
 # Load Images
 loader = Loader(opt)
-images, color_metas = loader.load()
+images = loader.load()
 
 # Load Labeler Class
 labeler = Labeler(opt)
 
 # For each file
-for image, color_meta, file in zip(images, color_metas, loader.files):
+for image, file in zip(images, loader.files):
     if not (os.path.exists(os.path.join(opt.inst_path, file)) and
             os.path.exists(os.path.join(opt.label_path, file)) and
             os.path.exists(os.path.join(opt.style_path, file.replace('png', 'jpg')))):
-        labeled_img = labeler.label(image, color_meta)
+        labeled_img = labeler.label(image)
         io.imsave(os.path.join(opt.inst_path, file), labeled_img)
         io.imsave(os.path.join(opt.label_path, file), labeled_img)
 
@@ -71,7 +71,7 @@ for i, data_i in enumerate(dataloader):
     generated = model(data_i, mode='inference')
 
     img_path = data_i['path']
-    print('saving')
+
     for b in range(generated.shape[0]):
         print('process image... %s' % img_path[b])
         visuals = OrderedDict([('input_label', data_i['label'][b]),

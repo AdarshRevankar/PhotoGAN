@@ -8,7 +8,7 @@ Generation of Photo Realistic Image using `GAN` and `SPADE`. This project demons
 Here our Goal is to Generate Photo Realistic Image, using the `SPADE` Architecture. This Architecture helps to Generate more Robust Images using `GAN`.
 
 ---
-##### Setup
+#### Setup
 1. In-order to setup we require `python 3.x` version (Better with Anaconda Environment) with requirements specified in [requirements.txt](https://github.com/AdarshRevankar/PhotoGAN/blob/master/requirements.txt).
 1. Download the `checkpoints` from [this](https://drive.google.com/open?id=1hHyGiQhM5pOIOCcpor7LzyUT5hiAZnGM) link.
 1. Extract the `checkpoints` in the current directory ie. `PhotoGAN > Checkpoints`.
@@ -17,7 +17,7 @@ Here our Goal is to Generate Photo Realistic Image, using the `SPADE` Architectu
    `python test.py --name coco_pretrained --dataset_mode coco --dataroot datasets/coco_stuff/`
 
 ---
-##### Visuals
+#### Visuals
 Image to Image Synthesis is performed over the `Drawing (Left)` and the Realistic Image is `Generated (Right)`.
 <table style="animation: ease-in-out">
     <tr>
@@ -31,9 +31,13 @@ Image to Image Synthesis is performed over the `Drawing (Left)` and the Realisti
 </table>
 
 ---
-##### Contributors
-Special Thanks to project partners
+#### Contributors
+Special Thanks to project partners and 
 
 1. `Akshaya M`
 1. `Shubham Dogra`
 1. `Adarsh Revankar`
+
+and also
+
+Big thanks to [Synchronized BatchNormalization](github.com/vacancy/Synchronized-BatchNorm-PyTorch) for providing Batch Normalization implementation.

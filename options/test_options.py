@@ -25,7 +25,7 @@ class TestOptions(BaseOptions):
         parser.add_argument('--color', type=str, default='rgb', help='Color Encoding of image [rgb|label]')
 
         # Path
-        parser.add_argument('--input_path', type=str, default='datasets/coco_stuff/val_drawing',
+        parser.add_argument('--drawings_path', type=str, default='datasets/coco_stuff/val_drawing',
                             help='Input Path for Pre-processing')
         parser.add_argument('--style_set_path', type=str, default='datasets/coco_stuff/val_styles',
                             help='Input Path for Determining Styles')
@@ -37,8 +37,6 @@ class TestOptions(BaseOptions):
         parser.add_argument('--style_path', type=str, default='datasets/coco_stuff/val_img',
                             help='Style Image Storage Path')
 
-        parser.add_argument('--colors_meta_path', type=str, default='datasets/coco_stuff/colors.txt',
-                            help='Contains colors list present in the image')
         parser.add_argument('--color_code_path', type=str, default='datasets/coco_stuff/color_code.csv',
                             help='Contains color to label map info')
 

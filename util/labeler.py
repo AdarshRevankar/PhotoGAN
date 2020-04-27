@@ -23,7 +23,7 @@ class Labeler:
         # Create dictionary from [ gray_code, label_code]
         self.color_to_label_map = dict(zip(gray_code, label_code))
 
-    def label(self, image, color_meta):
+    def label(self, image):
 
         # Clone the images
         labeled_image = copy.deepcopy(image)
@@ -32,11 +32,9 @@ class Labeler:
         labeled_image[:, :] = 0
 
         # For each color info, label those pixels
-        for color in color_meta:
-            # Check if its present
-            if color in self.color_to_label_map.keys():
-                # Replace color
-                labeled_image[image == color] = self.color_to_label_map[color]
+        for color in self.color_to_label_map.keys():
+            # Replace color
+            labeled_image[image == color] = self.color_to_label_map[color]
 
         # Return the labeled image
         return labeled_image
