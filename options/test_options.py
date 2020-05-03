@@ -25,6 +25,9 @@ class TestOptions(BaseOptions):
         parser.add_argument('--color', type=str, default='rgb', help='Color Encoding of image [rgb|label]')
 
         # Path
+        parser.add_argument('--drawing_file', type=str, default='None', help='Provides the drawing image name')
+        parser.add_argument('--style_index', type=int, default=1,
+                            help='Style Index number specifying which style image was clicked')
         parser.add_argument('--drawings_path', type=str, default='datasets/coco_stuff/val_drawing',
                             help='Input Path for Pre-processing')
         parser.add_argument('--style_set_path', type=str, default='datasets/coco_stuff/val_styles',

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="data:,">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script type='text/javascript' type="module" defer>
+        var filename = '';
+        var style_index = '0';
+    </script>
+    <script src="/static/js/app.js" type="module" defer></script>
+    <title>Generation of Photo Realistic Image using GAN and SPADE</title>
+</head>
+
+<body>
+    <div class="toolbox left">
+        <div class="group commands">
+            <div class="item" data-command="undo" title="undo">
+                <img src="/static/images/undo.png" alt="undo image">
+            </div>
+            <div class="item" data-command="download" title="download">
+                <img src="/static/images/download.png" alt="undo image">
+            </div>
+        </div>
+        <div class="group shapes">
+            <div class="item" data-tool="circle" title="udno">
+                <img src="/static/images/circle-icon.png" alt="undo image">
+            </div>
+        </div>
+        <div class="group tools">
+            <div class="item active" data-tool="pencil" title="Pencil tool">
+                <img src="/static/images/pencil-icon.png" alt="undo image">
+            </div>
+            <div class="item " data-tool="brush" title="Brush tool">
+                <img src="/static/images/brush-icon.png" alt="undo image">
+            </div>
+            <div class="item" data-tool="paint-bucket" title="Paint Bucket tool">
+                <img src="/static/images/paint-bucket-icon.png" alt="undo image">
+            </div>
+        </div>
+        <div class="group linewidths for-shapes" style="display:block">
+
+            <div class="item" data-line-width="6" title="6 Pixel">
+                <div class="linewidth" style="width:6px;height:6px"></div>
+            </div>
+            <div class="item " data-line-width="8" title="8 Pixel">
+                <div class="linewidth" style="width:8px;height:8px"></div>
+            </div>
+            <div class="item active" data-line-width="10" title="10 Pixel">
+                <div class="linewidth" style="width:10px;height:10px"></div>
+            </div>
+            <div class="item " data-line-width="12" title="12 Pixel">
+                <div class="linewidth" style="width:12px;height:12px"></div>
+            </div>
+        </div>
+        <div class="group linewidths for-brush" style="display: none;">
+            <div class="item " data-brush-width="8" title="8 Pixel">
+                <div class="linewidth" style="width:8px;height:8px"></div>
+            </div>
+            <div class="item " data-brush-width="10" title="10 Pixel">
+                <div class="linewidth" style="width:10px;height:10px"></div>
+            </div>
+            <div class="item active" data-brush-width="12" title="12 Pixel">
+                <div class="linewidth" style="width:12px;height:12px"></div>
+            </div>
+            <div class="item" data-brush-width="14" title="14 Pixel">
+                <div class="linewidth" style="width:14px;height:14px"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+
+
+        <table id="center-content">
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <canvas id="canvas" width="512" height="256"></canvas>
+                    </td>
+                    <td valign="center" align="center">
+                        <button class="start butt next"></button>
+                    </td>
+                    <td align="center">
+                        <div id="message">
+                            <img src="/static/gallery.png" id="gallery" alt="photogenic image">
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+    <div class="toolbox right">
+        <div class="group swatches">
+            <div class="item active" data-element="landscape">
+                <div class="swatch">
+                    Landscape
+                </div>
+            </div>
+            <div class="item" data-element="plant">
+                <div class="swatch">
+                    Plant
+                </div>
+            </div>
+            <hr>
+
+
+            <div class="group for-landscape" style="display: none;">
+                <div class="item active" data-landscape="#9ac6da" title="Sea">
+                    <div class="swatch">
+                        Sea
+                    </div>
+                </div>
+                <div class="item" data-landscape="#9e9eaa" title="Snow">
+                    <div class="swatch">
+                        Snow
+                    </div>
+                </div>
+                <div class="item " data-landscape="#869664" title="Mountain">
+                    <div class="swatch">
+                        Mountain
+                    </div>
+                </div>
+                <div class="item " data-landscape="#7ec864" title="Hill">
+                    <div class="swatch">
+                        Hill
+                    </div>
+                </div>
+                <div class="item" data-landscape="#9364c8" title="River">
+                    <div class="swatch">
+                        River
+                    </div>
+                </div>
+                <div class="item" data-landscape="#77ba1d" title="Fog">
+                    <div class="swatch">
+                        Fog
+                    </div>
+                </div>
+                <div class="item" data-landscape="#9ceedd" title="Sky">
+                    <div class="swatch">
+                        Sky
+                    </div>
+                </div>
+                <div class="item" data-landscape="#a1a164" title="Stone">
+                    <div class="swatch">
+                        Stone
+                    </div>
+                </div>
+                <div class="item" data-landscape="#b1c8ff" title="Water">
+                    <div class="swatch">
+                        Water
+                    </div>
+                </div>
+                <div class="item" data-landscape="#956432" title="Rock">
+                    <div class="swatch">
+                        Rock
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="group for-plant" style="display: none;">
+                <div class="item active" data-plant="#760000" title="Flower">
+                    <div class="swatch">
+                        Flower
+                    </div>
+                </div>
+                <div class="item " data-plant="#7bc800" title="Grass">
+                    <div class="swatch">
+                        Grass
+                    </div>
+                </div>
+                <div class="item" data-plant="#a8c832" title="Tree">
+                    <div class="swatch">
+                        Tree
+                    </div>
+                </div>
+                <div class="item" data-plant="#606e32" title="Bush">
+                    <div class="swatch">
+                        Bush
+                    </div>
+                </div>
+                <div class="item " data-plant="#a2a3eb" title="Straw">
+                    <div class="swatch">
+                        Straw
+                    </div>
+                </div>
+                <div class="item" data-plant="#b57b00" title="Wood">
+                    <div class="swatch">
+                        Wood
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- STYLE IMAGE -->
+
+    <table class="style-table" id="">
+        <tbody>
+            <tr>
+                <th data-style="0" class="active">
+                    <button id="example0" class="btn style0 "></button>
+                </th>
+                <th data-style="1">
+                    <button id="example1" class="btn style1"></button>
+                </th>
+                <th data-style="2">
+                    <button id="example2" class="btn style2"></button>
+                </th>
+                <th data-style="3">
+                    <button id="example3" class="btn style3"></button>
+                </th>
+                <th data-style="4">
+                    <button id="example4" class="btn style4"></button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+    <script type="text/javascript">
+        var server = "http://127.0.0.1:5000";
+
+        var op_data = {
+            'style_index': 1,
+        };
+
+
+        $(function () {
+            $(".start").click(function () {
+
+                console.log("html", style_index)
+                // filename=download();
+                op_data = {
+                    'filename': filename,
+                    'style_image': style_index
+                }
+
+                var appdir = '/gan';
+
+                var send_msg = "<p>Sending Data</p>";
+
+                var received_msg = "<p>Result returned</p>";
+
+
+                //$('#message').html(send_msg);
+                $.ajax({
+                    type: "POST",
+                    url: server + appdir,
+                    data: JSON.stringify(op_data),
+                    dataType: 'json'
+                }).done(function (data) {
+                    console.log(data);
+                    var output = '/' + data['img']
+                    $('#message').children('img').attr('src', '/static/output' + output).css(
+                        'right: 12%;position:absolute')
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

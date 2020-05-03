@@ -11,6 +11,7 @@ from util.preprocess_loader import Loader
 from util.visualizer import Visualizer
 from util import html
 
+MAX_IMAGE_BUFFER = 5
 opt = TestOptions().parse()
 
 # +-----------------------------------------+
@@ -25,22 +26,28 @@ images = loader.load()
 labeler = Labeler(opt)
 
 # For each file
+current_images_size = len(loader.files)
 for image, file in zip(images, loader.files):
     if not (os.path.exists(os.path.join(opt.inst_path, file)) and
             os.path.exists(os.path.join(opt.label_path, file)) and
             os.path.exists(os.path.join(opt.style_path, file.replace('png', 'jpg')))):
+
+        # Label The image
         labeled_img = labeler.label(image)
+
+        # Save the Instance Image
         io.imsave(os.path.join(opt.inst_path, file), labeled_img)
+
+        # Save the Label Image
         io.imsave(os.path.join(opt.label_path, file), labeled_img)
 
-        # @TODO: Temporary fix, Implement Dynamic Nature
+        # Copy the Style Image
         shutil.copyfile(os.path.join(opt.style_set_path, '7.jpg'),
                         os.path.join(opt.style_path, file.replace('png', 'jpg')))
 
 # +-----------------------------------------+
 # |               TESTING                   |
 # +-----------------------------------------+
-
 dataloader = data.create_dataloader(opt)
 
 model = Pix2PixModel(opt)
@@ -78,4 +85,10 @@ for i, data_i in enumerate(dataloader):
                                ('synthesized_image', generated[b])])
         visualizer.save_images(webpage, visuals, img_path[b:b + 1])
 
-webpage.save()
+# Clear the images
+if current_images_size >= MAX_IMAGE_BUFFER:
+    for file in loader.files:
+        # Remove Image, Instance, Label
+        os.remove(os.path.join(opt.inst_path, file))
+        os.remove(os.path.join(opt.label_path, file))
+        os.remove(os.path.join(opt.style_path, file.replace('png', 'jpg')))

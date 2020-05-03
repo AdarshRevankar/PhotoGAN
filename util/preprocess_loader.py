@@ -28,9 +28,9 @@ class Loader:
 
         for file in self.files:
             # Read the image
-            image = io.imread(os.path.join(self.drawings_path, file), as_gray=is_gray)
+            image = io.imread(os.path.join(self.drawings_path, file))[:, :, :3]
 
             # Resize the image
-            images.append((resize(image=image, output_shape=self.size) * 255).astype('uint8'))
+            images.append((resize(image=image, anti_aliasing=False, output_shape=self.size) * 255.).astype('uint8'))
 
         return images
