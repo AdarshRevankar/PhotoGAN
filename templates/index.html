@@ -10,12 +10,12 @@
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script type='text/javascript' type="module" defer>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script  type="text/javascript " defer>
         var filename = '';
         var style_index = '0';
     </script>
-    <script src="/static/js/app.js" type="module" defer></script>
+    <script src="../static/js/app.js" type="module" defer></script>
     <title>Generation of Photo Realistic Image using GAN and SPADE</title>
 </head>
 
@@ -27,11 +27,6 @@
             </div>
             <div class="item" data-command="download" title="download">
                 <img src="/static/images/download.png" alt="undo image">
-            </div>
-        </div>
-        <div class="group shapes">
-            <div class="item" data-tool="circle" title="udno">
-                <img src="/static/images/circle-icon.png" alt="undo image">
             </div>
         </div>
         <div class="group tools">
@@ -47,31 +42,31 @@
         </div>
         <div class="group linewidths for-shapes" style="display:block">
 
-            <div class="item" data-line-width="6" title="6 Pixel">
-                <div class="linewidth" style="width:6px;height:6px"></div>
-            </div>
-            <div class="item " data-line-width="8" title="8 Pixel">
-                <div class="linewidth" style="width:8px;height:8px"></div>
-            </div>
-            <div class="item active" data-line-width="10" title="10 Pixel">
-                <div class="linewidth" style="width:10px;height:10px"></div>
-            </div>
             <div class="item " data-line-width="12" title="12 Pixel">
                 <div class="linewidth" style="width:12px;height:12px"></div>
             </div>
+            <div class="item active" data-line-width="14" title="14 Pixel">
+                <div class="linewidth" style="width:14px;height:14px"></div>
+            </div>
+            <div class="item " data-line-width="16" title="16 Pixel">
+                <div class="linewidth" style="width:16px;height:16px"></div>
+            </div>
+            <div class="item" data-line-width="20" title="20 Pixel">
+                <div class="linewidth" style="width:20px;height:20px"></div>
+            </div>
         </div>
         <div class="group linewidths for-brush" style="display: none;">
-            <div class="item " data-brush-width="8" title="8 Pixel">
-                <div class="linewidth" style="width:8px;height:8px"></div>
+            <div class="item " data-brush-width="11" title="11 Pixel">
+                <div class="linewidth" style="width:11px;height:11px"></div>
             </div>
-            <div class="item " data-brush-width="10" title="10 Pixel">
-                <div class="linewidth" style="width:10px;height:10px"></div>
+            <div class="item " data-brush-width="15" title="15 Pixel">
+                <div class="linewidth" style="width:15px;height:15px"></div>
             </div>
-            <div class="item active" data-brush-width="12" title="12 Pixel">
-                <div class="linewidth" style="width:12px;height:12px"></div>
+            <div class="item active" data-brush-width="18" title="18 Pixel">
+                <div class="linewidth" style="width:18px;height:18px"></div>
             </div>
-            <div class="item" data-brush-width="14" title="14 Pixel">
-                <div class="linewidth" style="width:14px;height:14px"></div>
+            <div class="item" data-brush-width="21" title="21 Pixel">
+                <div class="linewidth" style="width:21px;height:21px"></div>
             </div>
         </div>
     </div>
@@ -114,14 +109,19 @@
 
 
             <div class="group for-landscape" style="display: none;">
-                <div class="item active" data-landscape="#9ac6da" title="Sea">
+                <div class="item active" data-landscape="#64bee6" title="Sea">
                     <div class="swatch">
                         Sea
                     </div>
                 </div>
-                <div class="item" data-landscape="#9e9eaa" title="Snow">
+                <div class="item" data-landscape="#969696" title="Snow">
                     <div class="swatch">
                         Snow
+                    </div>
+                </div>
+                <div class="item" data-landscape="#9696dc" title="Cloud">
+                    <div class="swatch">
+                        Clouds
                     </div>
                 </div>
                 <div class="item " data-landscape="#869664" title="Mountain">
@@ -129,12 +129,12 @@
                         Mountain
                     </div>
                 </div>
-                <div class="item " data-landscape="#7ec864" title="Hill">
+                <div class="item " data-landscape="#006400" title="Hill">
                     <div class="swatch">
                         Hill
                     </div>
                 </div>
-                <div class="item" data-landscape="#9364c8" title="River">
+                <div class="item" data-landscape="#0064a0" title="River">
                     <div class="swatch">
                         River
                     </div>
@@ -149,12 +149,12 @@
                         Sky
                     </div>
                 </div>
-                <div class="item" data-landscape="#a1a164" title="Stone">
+                <div class="item" data-landscape="#645032" title="Stone">
                     <div class="swatch">
                         Stone
                     </div>
                 </div>
-                <div class="item" data-landscape="#b1c8ff" title="Water">
+                <div class="item" data-landscape="#c8c8c8" title="Water">
                     <div class="swatch">
                         Water
                     </div>
@@ -162,6 +162,11 @@
                 <div class="item" data-landscape="#956432" title="Rock">
                     <div class="swatch">
                         Rock
+                    </div>
+                </div>
+                <div class="item" data-landscape="#464646" title="Road">
+                    <div class="swatch">
+                        Road
                     </div>
                 </div>
             </div>
@@ -173,17 +178,17 @@
                         Flower
                     </div>
                 </div>
-                <div class="item " data-plant="#7bc800" title="Grass">
+                <div class="item " data-plant="#00a064" title="Leaves">
                     <div class="swatch">
-                        Grass
+                        Leaves
                     </div>
                 </div>
-                <div class="item" data-plant="#a8c832" title="Tree">
+                <div class="item" data-plant="#0a780a" title="Tree">
                     <div class="swatch">
                         Tree
                     </div>
                 </div>
-                <div class="item" data-plant="#606e32" title="Bush">
+                <div class="item" data-plant="#50c850" title="Bush">
                     <div class="swatch">
                         Bush
                     </div>
@@ -193,7 +198,7 @@
                         Straw
                     </div>
                 </div>
-                <div class="item" data-plant="#b57b00" title="Wood">
+                <div class="item" data-plant="#645014" title="Wood">
                     <div class="swatch">
                         Wood
                     </div>

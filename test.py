@@ -31,7 +31,6 @@ for image, file in zip(images, loader.files):
     if not (os.path.exists(os.path.join(opt.inst_path, file)) and
             os.path.exists(os.path.join(opt.label_path, file)) and
             os.path.exists(os.path.join(opt.style_path, file.replace('png', 'jpg')))):
-
         # Label The image
         labeled_img = labeler.label(image)
 
@@ -42,8 +41,10 @@ for image, file in zip(images, loader.files):
         io.imsave(os.path.join(opt.label_path, file), labeled_img)
 
         # Copy the Style Image
-        shutil.copyfile(os.path.join(opt.style_set_path, '7.jpg'),
-                        os.path.join(opt.style_path, file.replace('png', 'jpg')))
+        shutil.copyfile(
+            os.path.join(opt.style_set_path, str(opt.style_index) + '.jpg'),
+            os.path.join(opt.style_path, file.replace('png', 'jpg'))
+        )
 
 # +-----------------------------------------+
 # |               TESTING                   |
@@ -57,11 +58,8 @@ model.eval()
 visualizer = Visualizer(opt)
 
 # create a webpage that summarizes the all results
-web_dir = os.path.join(opt.results_dir, opt.name,
+img_dir = os.path.join(opt.results_dir, opt.name,
                        '%s_%s' % (opt.phase, opt.which_epoch))
-webpage = html.HTML(web_dir,
-                    'Experiment = %s, Phase = %s, Epoch = %s' %
-                    (opt.name, opt.phase, opt.which_epoch))
 
 # test
 for i, data_i in enumerate(dataloader):
@@ -83,7 +81,7 @@ for i, data_i in enumerate(dataloader):
         print('process image... %s' % img_path[b])
         visuals = OrderedDict([('input_label', data_i['label'][b]),
                                ('synthesized_image', generated[b])])
-        visualizer.save_images(webpage, visuals, img_path[b:b + 1])
+        visualizer.save_images(img_dir, visuals, img_path[b:b + 1])
 
 # Clear the images
 if current_images_size >= MAX_IMAGE_BUFFER:

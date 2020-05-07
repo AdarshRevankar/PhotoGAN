@@ -1,3 +1,4 @@
+from subprocess import call
 from flask import Flask, request, jsonify
 import json
 from flask import render_template
@@ -18,8 +19,14 @@ def sum_num():
         data = key
     print("Data Recieved from front-End", data)
     data_dic = json.loads(data)
+
+    # Execute the command
+    print("*****" * 20, "\nStarted Executing TEST\n", "*****" * 20)
+    call(["python", "test.py", "--style_index", str(int(data_dic["style_image"]) + 1)])
+    print("*****" * 20, "\n  Ended Executing TEST\n", "*****" * 20)
+
     resp_dic = {
-        'img': "mountain.png",
+        'img': "coco_pretrained/test_latest/synthesized_image/Grassland.png",
         'msg': 'successful'
     }
     resp = jsonify(resp_dic)
