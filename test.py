@@ -10,8 +10,10 @@ from util.visualizer import Visualizer
 import os
 
 
-def pre_process_semantic_input():
+def pre_process_semantic_input(style_index=1):
     # Load Images
+    loader = Loader(opt)
+
     images = loader.load()
 
     # Load Labeler Class
@@ -33,14 +35,15 @@ def pre_process_semantic_input():
 
             # Copy the Style Image
             shutil.copyfile(
-                os.path.join(opt.style_set_path, str(opt.style_index) + '.jpg'),
+                os.path.join(opt.style_set_path, str(style_index) + '.jpg'),
                 os.path.join(opt.style_path, file.replace('png', 'jpg'))
             )
 
 
 def generate_from_data():
     # test
-    for i, data_i in enumerate(data.create_dataloader(opt)):
+    dataloader = data.create_dataloader(opt)
+    for i, data_i in enumerate(dataloader):
         if i * opt.batchSize >= opt.how_many:
             break
         generated = model(data_i, mode='inference')
@@ -52,20 +55,25 @@ def generate_from_data():
             visualizer.save_images(img_dir, visuals, img_path[b:b + 1])
 
 
-def clear_images(max_img_buffer=5, flush=False):
+def clear_images(exclude_file, max_img_buffer=5, flush=False):
     # Clear the images
-    current_images_size = len(loader.files)
+    current_images_size = len(os.listdir(opt.drawings_path))
     if current_images_size >= max_img_buffer or flush:
-        for file in loader.files:
+        for file in os.listdir(opt.drawings_path):
+            if file == exclude_file:
+                continue
             # Remove Image, Instance, Label
+            os.remove(os.path.join(opt.drawings_path, file))
             os.remove(os.path.join(opt.inst_path, file))
             os.remove(os.path.join(opt.label_path, file))
+            os.remove(os.path.join(opt.results_dir + 'coco_pretrained/test_latest/synthesized_image', file))
+            os.remove(os.path.join(opt.results_dir + 'coco_pretrained/test_latest/input_label', file))
             os.remove(os.path.join(opt.style_path, file.replace('png', 'jpg')))
 
 
+# Initialize Contents
 opt = TestOptions().parse()
 model = Pix2PixModel(opt)
 model.eval()
 visualizer = Visualizer(opt)
 img_dir = os.path.join(opt.results_dir, opt.name, '%s_%s' % (opt.phase, opt.which_epoch))
-loader = Loader(opt)
