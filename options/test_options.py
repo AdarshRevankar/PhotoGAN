@@ -42,5 +42,4 @@ class TestOptions(BaseOptions):
 
         parser.add_argument('--color_code_path', type=str, default='datasets/coco_stuff/color_code.csv',
                             help='Contains color to label map info')
-
         return parser
