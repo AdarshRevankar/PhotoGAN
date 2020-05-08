@@ -18,7 +18,7 @@ export default class Paint {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.context = canvas.getContext("2d");
-        this.context.fillStyle = "#FFFFFF";
+        this.context.fillStyle = "#9CEEDD";
         this.context.fillRect(0, 0, canvas.width, canvas.height);
         this.undoStack = [];
         this.undoLimit = 3;

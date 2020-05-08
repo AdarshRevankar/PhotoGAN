@@ -7,6 +7,7 @@ import {
     TOOL_ERASER
 } from './tool.js';
 import Paint from './paint.class.js';
+
 var paint = new Paint("canvas");
 paint.activeTool = TOOL_PENCIL;
 paint.brushSize = 18
@@ -22,14 +23,14 @@ document.querySelectorAll("[data-command]").forEach(
             if (command === 'undo') {
                 paint.undoPaint()
             } else if (command === 'download') {
-                var canvas=document.getElementById("canvas");
-                var image=canvas.toDataURL("image/png",1.0)
-                .replace("image/png","image/active-stream")
-                var link=document.createElement("a");
-                link.href=image;
-                filename= Date.now() + '.png'
-                link.download=filename
-                link.click(); 
+                var canvas = document.getElementById("canvas");
+                var image = canvas.toDataURL("image/png", 1.0)
+                    .replace("image/png", "image/active-stream")
+                var link = document.createElement("a");
+                link.href = image;
+                filename = Date.now() + '.png'
+                link.download = filename
+                link.click();
                 ;
             }
         })
@@ -88,7 +89,7 @@ document.querySelectorAll("[data-style]").forEach(
         item.addEventListener("click", e => {
             document.querySelector("[data-style].active").classList.toggle("active");
             item.classList.add("active")
-             let style_name = item.getAttribute("data-style");
+            let style_name = item.getAttribute("data-style");
             style_index = style_name
         })
     }
@@ -106,7 +107,6 @@ document.querySelectorAll("[data-brush-width]").forEach(
 )
 
 
-
 document.querySelectorAll("[data-element]").forEach(
     item => {
         item.addEventListener("click", e => {
@@ -116,7 +116,7 @@ document.querySelectorAll("[data-element]").forEach(
             let element = item.getAttribute("data-element");
             console.log(element)
             switch (element) {
-                case 'landscape': 
+                case 'landscape':
                     document.querySelector(".group.for-landscape").style.display = "block"
                     document.querySelector(".group.for-plant").style.display = "none"
                     break;
