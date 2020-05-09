@@ -235,26 +235,10 @@
 
 
 <script>
-    var server = "http://127.0.0.1:5000";
-
-    var op_data;
     $(function () {
         $(".start").click(function () {
 
-            var canvas = document.getElementById("canvas");
-            //image in base64
-
-            image64 = canvas.toDataURL("image/png", 1.0)
-
-            console.log("style_index", style_index)
-            console.log(image64)
             filename = new Date().getTime() + '.png';
-            // filename=download();
-            // op_data = {
-            //     'filename': filename,
-            //     'style_image': style_index,
-            //     'Imagebase64': image64
-            // }
 
             var appdir = '/gan';
 
@@ -262,12 +246,11 @@
 
             var received_msg = "<p>Result returned</p>";
 
-
-            //$('#message').html(send_msg);
             var dataURL = document.getElementById('canvas').toDataURL();
+
             $.ajax({
                 type: "POST",
-                url: server + appdir,
+                url: appdir,
                 data: {
                     imageBase64: dataURL,
                     filename: filename,
