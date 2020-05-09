@@ -1,11 +1,8 @@
 import base64
 import os
 import re
-
 import test
-from binascii import a2b_base64
 from flask import Flask, request, jsonify, render_template
-import json
 
 app = Flask(__name__)
 
@@ -28,6 +25,9 @@ def save_base64_image(image_b64, folder, filename):
 
 @app.route('/gan', methods=['POST'])
 def generate():
+    save_dir = 'coco_pretrained/test_latest/synthesized_image/'
+    output_dir = 'static/output/'
+
     image_b64 = request.values['imageBase64']
     filename = request.values['filename']
     style_index = int(request.values['style_image'])
@@ -61,6 +61,4 @@ def generate():
 
 
 if __name__ == '__main__':
-    save_dir = 'coco_pretrained/test_latest/synthesized_image/'
-    output_dir = 'static/output/'
     app.run()
