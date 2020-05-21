@@ -37,7 +37,7 @@ def generate():
 
     # Execute the command
     print('\n', "*****" * 20, "\nStarted Executing TEST\n", "*****" * 20)
-    test.clear_images(exclude_file= filename, max_img_buffer=4)
+    test.clear_images(exclude_file=filename, max_img_buffer=4)
     test.pre_process_semantic_input(style_index=style_index)
     test.generate_from_data()
     print('\n', "*****" * 20, "\n  Ended Executing TEST\n", "*****" * 20)

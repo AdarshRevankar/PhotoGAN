@@ -71,10 +71,10 @@ class SPADEGenerator(BaseNetwork):
     def forward(self, input, z=None):
         seg = input
 
-        if self.opt.use_vae:
+        if self.opt.use_vae or True:
             # we sample z from unit normal and reshape the tensor
             if z is None:
-                z = torch.randn(input.size(0), self.opt.z_dim,
+                z = torch.randn(1024, 184, 3, 3,
                                 dtype=torch.float32, device=input.get_device())
             x = self.fc(z)
             x = x.view(-1, 16 * self.opt.ngf, self.sh, self.sw)

@@ -2,6 +2,10 @@ from .base_options import BaseOptions
 
 
 class TestOptions(BaseOptions):
+    def __init__(self):
+        super().__init__()
+        self.isTrain = False
+
     def initialize(self, parser):
         BaseOptions.initialize(self, parser)
         parser.add_argument('--results_dir', type=str, default='./static/output/', help='saves results here.')
@@ -13,7 +17,6 @@ class TestOptions(BaseOptions):
         parser.set_defaults(serial_batches=True)
         parser.set_defaults(no_flip=True)
         parser.set_defaults(phase='test')
-        self.isTrain = False
 
         # +-----------------------------------------------------+
         # |             PRE-PROCESSING PARAMS                   |

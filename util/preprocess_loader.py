@@ -19,7 +19,7 @@ class Loader:
 
     def load(self):
         """
-        Loads the Grayscale images from the path
+        Loads the RGB images from the path
         """
         images = []
 

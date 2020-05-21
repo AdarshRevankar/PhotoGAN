@@ -46,7 +46,7 @@ def generate_from_data():
     for i, data_i in enumerate(dataloader):
         if i * opt.batchSize >= opt.how_many:
             break
-        generated = model(data_i, mode='inference')
+        g_loss, generated = model(data_i, mode='inference')
         img_path = data_i['path']
         for b in range(generated.shape[0]):
             print('process image... %s' % img_path[b])
@@ -59,16 +59,26 @@ def clear_images(exclude_file, max_img_buffer=5, flush=False):
     # Clear the images
     current_images_size = len(os.listdir(opt.drawings_path))
     if current_images_size >= max_img_buffer or flush:
-        for file in os.listdir(opt.drawings_path):
-            if file == exclude_file:
-                continue
-            # Remove Image, Instance, Label
-            os.remove(os.path.join(opt.drawings_path, file))
-            os.remove(os.path.join(opt.inst_path, file))
-            os.remove(os.path.join(opt.label_path, file))
-            os.remove(os.path.join(opt.results_dir + 'coco_pretrained/test_latest/synthesized_image', file))
-            os.remove(os.path.join(opt.results_dir + 'coco_pretrained/test_latest/input_label', file))
-            os.remove(os.path.join(opt.style_path, file.replace('png', 'jpg')))
+        clear_folder(os.path.join(opt.results_dir + 'coco_pretrained/test_latest/synthesized_image'), exclude_file)
+        clear_folder(os.path.join(opt.results_dir + 'coco_pretrained/test_latest/input_label'), exclude_file)
+        clear_folder(opt.style_path, exclude_file)
+        clear_folder(opt.label_path, exclude_file)
+        clear_folder(opt.inst_path, exclude_file)
+        clear_folder(opt.drawings_path, exclude_file)
+
+
+def clear_folder(folder, exclude_file):
+    for filename in os.listdir(folder):
+        if filename == exclude_file:
+            continue
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
 # Initialize Contents
