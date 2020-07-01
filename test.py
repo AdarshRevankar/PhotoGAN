@@ -46,7 +46,7 @@ def generate_from_data():
     for i, data_i in enumerate(dataloader):
         if i * opt.batchSize >= opt.how_many:
             break
-        g_loss, generated = model(data_i, mode='inference')
+        generated = model(data_i, mode='inference')
         img_path = data_i['path']
         for b in range(generated.shape[0]):
             print('process image... %s' % img_path[b])
@@ -55,7 +55,7 @@ def generate_from_data():
             visualizer.save_images(img_dir, visuals, img_path[b:b + 1])
 
 
-def clear_images(exclude_file, max_img_buffer=5, flush=False):
+def clear_images(exclude_file, max_img_buffer=100, flush=False):
     # Clear the images
     current_images_size = len(os.listdir(opt.drawings_path))
     if current_images_size >= max_img_buffer or flush:

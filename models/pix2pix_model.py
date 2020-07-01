@@ -1,14 +1,6 @@
 import torch
-from PIL import Image
-from torchvision import transforms
-
 import models.networks as networks
 import util.util as util
-import numpy as np
-import matplotlib.pyplot as plt
-import time
-
-import data.base_dataset as bds
 
 
 class Pix2PixModel(torch.nn.Module):
